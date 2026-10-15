@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fedorov-stand.org/schemas/fsspack-v1.0.json",
+  "title": "FSSPack_V1_Container",
+  "description": "JSON Schema specification for Fedorov Symmetry Stand exchange format v1.0",
+  "type": "object",
+  "required": ["format_version", "manifest", "payload"],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "manifest": {
+      "type": "object",
+      "required": [
+        "package_id",
+        "created_at_utc",
+        "exported_by_stand",
+        "kernel_version_compatibility",
+        "payload_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "package_id": {
+          "type": "string",
+          "pattern": "^fsspack-[a-z0-9-]+-v[0-9.]+$"
+        },
+        "created_at_utc": {
+          "type": "string"
+        },
+        "exported_by_stand": {
+          "type": "string",
+          "enum": ["STAND-1-REFERENCE", "STAND-1-ACCEPTANCE-V9"]
+        },
+        "kernel_version_compatibility": {
+          "type": "string",
+          "pattern": "^>=[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": ["passport", "mathematical_properties", "sender_attestation"],
+      "additionalProperties": false,
+      "properties": {
+        "passport": {
+          "type": "object",
+          "required": [
+            "setting_id",
+            "space_group_number",
+            "hermann_mauguin",
+            "hall_symbol",
+            "crystal_system",
+            "point_group",
+            "laue_class",
+            "is_centrosymmetric",
+            "is_enantiomorphic",
+            "operations_count",
+            "operations"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "setting_id": { "type": "string", "minLength": 1 },
+            "space_group_number": { "type": "integer", "minimum": 1, "maximum": 230 },
+            "hermann_mauguin": { "type": "string", "minLength": 1 },
+            "hall_symbol": { "type": "string", "minLength": 1 },
+            "crystal_system": { "type": "string", "minLength": 1 },
+            "point_group": { "type": "string", "minLength": 1 },
+            "laue_class": { "type": "string", "minLength": 1 },
+            "is_centrosymmetric": { "type": "boolean" },
+            "is_enantiomorphic": { "type": "boolean" },
+            "operations_count": { "type": "integer", "minimum": 1 },
+            "operations": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["index", "rotation_matrix", "translation_vector", "jones_faithful"],
+                "additionalProperties": false,
+                "properties": {
+                  "index": { "type": "integer", "minimum": 0 },
+                  "rotation_matrix": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": { "type": "integer", "minimum": -1, "maximum": 1 }
+                    }
+                  },
+                  "translation_vector": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "required": ["n", "d"],
+                      "additionalProperties": false,
+                      "properties": {
+                        "n": { "type": "integer" },
+                        "d": { "type": "integer", "exclusiveMinimum": 0 }
+                      }
+                    }
+                  },
+                  "jones_faithful": { "type": "string", "minLength": 1 },
+                  "seitz_symbol": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "mathematical_properties": {
+          "type": "object",
+          "required": [
+            "algebraic_group_order",
+            "screw_axes",
+            "glide_planes",
+            "center_of_inversion_present"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "algebraic_group_order": { "type": "integer", "minimum": 1 },
+            "screw_axes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["order", "axis_direction", "fractional_pitch"],
+                "additionalProperties": false,
+                "properties": {
+                  "order": { "type": "integer", "enum": [2, 3, 4, 6] },
+                  "axis_direction": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": { "type": "integer" }
+                  },
+                  "fractional_pitch": {
+                    "type": "object",
+                    "required": ["n", "d"],
+                    "additionalProperties": false,
+                    "properties": {
+                      "n": { "type": "integer" },
+                      "d": { "type": "integer", "exclusiveMinimum": 0 }
+                    }
+                  }
+                }
+              }
+            },
+            "glide_planes": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "center_of_inversion_present": { "type": "boolean" }
+          }
+        },
+        "sender_attestation": {
+          "type": "object",
+          "required": [
+            "tested_on_stand",
+            "math_engine_version",
+            "closure_test_passed",
+            "identity_element_verified",
+            "inverse_elements_verified",
+            "provenance_source",
+            "provenance_reference_hash"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "tested_on_stand": { "type": "string", "minLength": 1 },
+            "math_engine_version": { "type": "string", "minLength": 1 },
+            "closure_test_passed": { "type": "boolean" },
+            "identity_element_verified": { "type": "boolean" },
+            "inverse_elements_verified": { "type": "boolean" },
+            "provenance_source": { "type": "string", "minLength": 1 },
+            "provenance_reference_hash": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

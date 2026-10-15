@@ -1,0 +1,206 @@
+{
+  "format_version": "1.0.0",
+  "manifest": {
+    "package_id": "fsspack-sg78-p43-v1.0.0",
+    "created_at_utc": "2026-10-15T08:29:19.090Z",
+    "exported_by_stand": "STAND-1-ACCEPTANCE-V9",
+    "kernel_version_compatibility": ">=2.0.0",
+    "payload_sha256": "e2fff03c9b41b6e1a41b1450d191a827e2426a1137c0664512e9c2fd4f1073fc"
+  },
+  "payload": {
+    "passport": {
+      "setting_id": "P43",
+      "space_group_number": 78,
+      "hermann_mauguin": "P 43",
+      "hall_symbol": "P 4cw",
+      "crystal_system": "Tetragonal",
+      "point_group": "4",
+      "laue_class": "4/m",
+      "is_centrosymmetric": false,
+      "is_enantiomorphic": true,
+      "operations_count": 4,
+      "operations": [
+        {
+          "index": 0,
+          "rotation_matrix": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "translation_vector": [
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 0,
+              "d": 1
+            }
+          ],
+          "jones_faithful": "x,y,z"
+        },
+        {
+          "index": 1,
+          "rotation_matrix": [
+            [
+              0,
+              -1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "translation_vector": [
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 3,
+              "d": 4
+            }
+          ],
+          "jones_faithful": "-y,x,z+3/4"
+        },
+        {
+          "index": 2,
+          "rotation_matrix": [
+            [
+              -1,
+              0,
+              0
+            ],
+            [
+              0,
+              -1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "translation_vector": [
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 1,
+              "d": 2
+            }
+          ],
+          "jones_faithful": "-x,-y,z+1/2"
+        },
+        {
+          "index": 3,
+          "rotation_matrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "translation_vector": [
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 0,
+              "d": 1
+            },
+            {
+              "n": 1,
+              "d": 4
+            }
+          ],
+          "jones_faithful": "y,-x,z+1/4"
+        }
+      ]
+    },
+    "mathematical_properties": {
+      "algebraic_group_order": 4,
+      "screw_axes": [
+        {
+          "order": 4,
+          "axis_direction": [
+            0,
+            0,
+            1
+          ],
+          "fractional_pitch": {
+            "n": 3,
+            "d": 4
+          }
+        },
+        {
+          "order": 2,
+          "axis_direction": [
+            0,
+            0,
+            1
+          ],
+          "fractional_pitch": {
+            "n": 1,
+            "d": 2
+          }
+        }
+      ],
+      "glide_planes": [],
+      "center_of_inversion_present": false
+    },
+    "sender_attestation": {
+      "tested_on_stand": "STAND-1-ACCEPTANCE-V9",
+      "math_engine_version": "2.0.0-fss",
+      "closure_test_passed": true,
+      "identity_element_verified": true,
+      "inverse_elements_verified": true,
+      "provenance_source": "Gemmi/ITA 2024.1 (MPL-2.0)",
+      "provenance_reference_hash": "5cc1c23c6007e0e6cbd69289c6f7c0bff50e943e"
+    }
+  }
+}
